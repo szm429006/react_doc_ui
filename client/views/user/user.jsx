@@ -10,10 +10,10 @@ import { withStyles } from 'material-ui/styles'
 
 import UserIcon from 'material-ui-icons/AccountCircle'
 
-import Container from '../components/container'
+import Container from '../layout/container'
 import userStyles from './styles/user-style'
 
-@inject(stores => {
+@inject((stores) => {
   return {
     user: stores.appState.user,
   }
@@ -24,7 +24,7 @@ class User extends React.Component {
   }
 
   render() {
-    const classes = this.props.classes
+    const { classes } = this.props
     const user = this.props.user.info || {}
     return (
       <Container>

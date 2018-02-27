@@ -22,6 +22,11 @@ const styles = {
   },
 }
 
+@inject((stores) => {
+  return {
+    appState: stores.appState,
+  }
+}) @observer
 class MainAppBar extends React.Component {
   static contextTypes = {
     router: PropTypes.object,
@@ -45,11 +50,18 @@ class MainAppBar extends React.Component {
   /* eslint-enable */
 
   loginButtonClick() {
-    this.context.router.history.push('/user/login')
+    if (this.props.appState.user.isLogin) {
+      this.context.router.history.push('/user/info')
+    } else {
+      this.context.router.history.push('/user/login')
+    }
   }
 
   render() {
     const { classes } = this.props
+    const {
+      user,
+    } = this.props.appState
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -64,13 +76,19 @@ class MainAppBar extends React.Component {
               新建话题
             </Button>
             <Button color="contrast" onClick={this.loginButtonClick}>
-              登陆
+              {
+                user.isLogin ? user.info.loginName : '登录'
+              }
             </Button>
           </Toolbar>
         </AppBar>
       </div>
     )
   }
+}
+
+MainAppBar.wrappedComponent.propTypes = {
+  appState: PropTypes.object.isRequired,
 }
 
 MainAppBar.propTypes = {

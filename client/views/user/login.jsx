@@ -30,6 +30,7 @@ class UserLogin extends React.Component {
       helpText: '',
     }
     this.handleInput = this.handleInput.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
   componentWillMount() {
@@ -63,8 +64,7 @@ class UserLogin extends React.Component {
   }
 
   render() {
-    const classes = this.props.classes
-
+    const { classes } = this.props
     return (
       <UserWrapper>
         <div className={classes.root}>

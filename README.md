@@ -43,3 +43,4 @@ npm install package step
 35. npm i classnames -S
 36. npm i marked -S
 37. npm i dateformat -S
+38. npm i file-loader -S
