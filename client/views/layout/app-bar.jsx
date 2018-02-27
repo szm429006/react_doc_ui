@@ -39,11 +39,11 @@ class MainAppBar extends React.Component {
     this.loginButtonClick = this.loginButtonClick.bind(this)
   }
 
-  /* eslint-disable */
   onHomeIconClick() {
-
+    this.context.router.history.push('/index?tab=all')
   }
 
+  /* eslint-disable */
   createButtonClick() {
 
   }
@@ -77,7 +77,7 @@ class MainAppBar extends React.Component {
             </Button>
             <Button color="contrast" onClick={this.loginButtonClick}>
               {
-                user.isLogin ? user.info.loginName : '登录'
+                user.isLogin ? user.info.loginname : '登录'
               }
             </Button>
           </Toolbar>

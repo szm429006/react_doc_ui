@@ -15,9 +15,9 @@ import { withStyles } from 'material-ui/styles'
 import UserWrapper from './user'
 import infoStyles from './styles/user-info-style'
 
-const TopicItem = (({ topic }) => {
+const TopicItem = (({ topic, onClick }) => {
   return (
-    <ListItem>
+    <ListItem button onClick={onClick}>
       <Avatar src={topic.author.avatar_url} />
       <ListItemText
         primary={topic.title}
@@ -29,6 +29,7 @@ const TopicItem = (({ topic }) => {
 
 TopicItem.propTypes = {
   topic: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 @inject((stores) => {
@@ -43,12 +44,16 @@ class UserInfo extends React.Component {
   }
 
   componentWillMount() {
-    this.props.appState.getUserDetail()
-    this.props.appState.getUserCollection()
+    if (!this.props.user.isLogin) {
+      this.context.router.history.replace('/user/login')
+    } else {
+      this.props.appState.getUserDetail()
+      this.props.appState.getUserCollection()
+    }
   }
 
   render() {
-    const classes = this.props.classes
+    const { classes } = this.props
     const topics = this.props.user.detail.recent_topics
     const replies = this.props.user.detail.recent_replies
     const collections = this.props.user.collections.list
@@ -63,7 +68,7 @@ class UserInfo extends React.Component {
                 </Typography>
                 <List>
                   {
-                    topics.length > 0 ?
+                    topics ?
                       topics.map(topic => <TopicItem topic={topic} key={topic.id} />) :
                       <Typography align="center">
                         最近没有发布过话题
@@ -79,7 +84,7 @@ class UserInfo extends React.Component {
                 </Typography>
                 <List>
                   {
-                    replies.length > 0 ?
+                    replies ?
                       replies.map(topic => <TopicItem topic={topic} key={topic.id} />) :
                       <Typography align="center">
                         最近没有新的回复
@@ -113,11 +118,11 @@ class UserInfo extends React.Component {
 
 UserInfo.wrappedComponent.propTypes = {
   appState: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 }
 
 UserInfo.propTypes = {
   classes: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
 }
 
 export default withStyles(infoStyles)(UserInfo)
