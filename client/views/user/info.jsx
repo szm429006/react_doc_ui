@@ -52,10 +52,14 @@ class UserInfo extends React.Component {
     }
   }
 
+  goToTopic(id) {
+    this.context.router.history.push(`/detail/${id}`)
+  }
+
   render() {
     const { classes } = this.props
-    const topics = this.props.user.detail.recent_topics
-    const replies = this.props.user.detail.recent_replies
+    const topics = this.props.user.detail.recentTopics
+    const replies = this.props.user.detail.recentReplies
     const collections = this.props.user.collections.list
     return (
       <UserWrapper>
@@ -69,7 +73,13 @@ class UserInfo extends React.Component {
                 <List>
                   {
                     topics ?
-                      topics.map(topic => <TopicItem topic={topic} key={topic.id} />) :
+                      topics.map(topic => (
+                        <TopicItem
+                          topic={topic}
+                          key={topic.id}
+                          onClick={() => this.goToTopic(topic.id)}
+                        />
+                      )) :
                       <Typography align="center">
                         最近没有发布过话题
                       </Typography>
@@ -85,7 +95,13 @@ class UserInfo extends React.Component {
                 <List>
                   {
                     replies ?
-                      replies.map(topic => <TopicItem topic={topic} key={topic.id} />) :
+                      replies.map(topic => (
+                        <TopicItem
+                          topic={topic}
+                          key={topic.id}
+                          onClick={() => this.goToTopic(topic.id)}
+                        />
+                      )) :
                       <Typography align="center">
                         最近没有新的回复
                       </Typography>
@@ -101,7 +117,13 @@ class UserInfo extends React.Component {
                 <List>
                   {
                     collections.length > 0 ?
-                      collections.map(topic => <TopicItem topic={topic} key={topic.id} />) :
+                      collections.map(topic => (
+                        <TopicItem
+                          topic={topic}
+                          key={topic.id}
+                          onClick={() => this.goToTopic(topic.id)}
+                        />
+                      )) :
                       <Typography align="center">
                         还么有收藏话题哦
                       </Typography>

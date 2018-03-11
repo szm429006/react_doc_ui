@@ -43,11 +43,9 @@ class MainAppBar extends React.Component {
     this.context.router.history.push('/index?tab=all')
   }
 
-  /* eslint-disable */
   createButtonClick() {
-
+    this.context.router.history.push('/topic/create')
   }
-  /* eslint-enable */
 
   loginButtonClick() {
     if (this.props.appState.user.isLogin) {

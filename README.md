@@ -44,3 +44,4 @@ npm install package step
 36. npm i marked -S
 37. npm i dateformat -S
 38. npm i file-loader -S
+39. npm i react-simplemde-editor -S
