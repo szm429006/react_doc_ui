@@ -40,7 +40,7 @@ class MainAppBar extends React.Component {
   }
 
   onHomeIconClick() {
-    this.context.router.history.push('/index?tab=all')
+    this.context.router.history.push('/list?tab=all')
   }
 
   createButtonClick() {

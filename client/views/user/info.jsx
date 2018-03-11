@@ -72,7 +72,7 @@ class UserInfo extends React.Component {
                 </Typography>
                 <List>
                   {
-                    topics ?
+                    topics.length > 0 ?
                       topics.map(topic => (
                         <TopicItem
                           topic={topic}
@@ -94,7 +94,7 @@ class UserInfo extends React.Component {
                 </Typography>
                 <List>
                   {
-                    replies ?
+                    replies.length > 0 ?
                       replies.map(topic => (
                         <TopicItem
                           topic={topic}
